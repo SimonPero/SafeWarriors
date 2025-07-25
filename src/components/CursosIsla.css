@@ -1,0 +1,100 @@
+.cursos-container {
+  max-width: 800px;
+  margin: 0 auto;
+  -webkit-text-stroke: 0.6px black;
+  font-weight: 800;
+}
+
+.slider-wrapper {
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.curso-page {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .curso-page {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.curso-card {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 160px;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  color: white;
+}
+
+.curso-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  z-index: 0;
+}
+
+.curso-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.curso-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px black;
+}
+
+.curso-content button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background-color: black;
+  border: none;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.curso-content button::before {
+  content: "▶";
+  font-size: 1.5rem;
+}
+
+.boton-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.boton-wrapper button {
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  color: white;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}

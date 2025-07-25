@@ -1,14 +1,26 @@
 {
-  "name": "safe-warriors",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.12.3"
-  }
+	"name": "safe-warriors",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro build && wrangler pages dev",
+		"astro": "astro",
+		"deploy": "astro build && wrangler pages deploy",
+		"cf-typegen": "wrangler types"
+	},
+	"dependencies": {
+		"@astrojs/cloudflare": "^12.6.0",
+		"@astrojs/react": "^4.3.0",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"astro": "^5.12.3",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^24.1.0",
+		"wrangler": "^4.26.0"
+	}
 }
