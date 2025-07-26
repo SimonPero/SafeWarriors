@@ -1,19 +1,27 @@
-// @ts-check
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
-
+import react from '@astrojs/react';
 import cloudflare from '@astrojs/cloudflare';
 
-import react from '@astrojs/react';
-
-// https://astro.build/config
 export default defineConfig({
+  output: 'server',
   adapter: cloudflare({
-    platformProxy: {
-      enabled: true
+    imageService: 'passthrough',
+    runtime: {
+      mode: 'directory',
     },
-
-    imageService: "cloudflare"
   }),
-
-  integrations: [react()]
+  integrations: [react()],
+  vite: {
+    resolve: {
+      alias: import.meta.env.PROD && {
+        "react-dom/server": "react-dom/server.edge",
+      },
+    },
+    ssr: {
+      resolve: {
+        conditions: ['workerd', 'worker', 'browser'],
+      },
+    },
+  },
 });
