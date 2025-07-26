@@ -1,12 +1,14 @@
 .cursos-container {
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 1rem;
   -webkit-text-stroke: 0.6px black;
   font-weight: 800;
 }
 
 .slider-wrapper {
   overflow: hidden;
+  border-radius: 1rem;
 }
 
 .slider {
@@ -20,6 +22,8 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   padding: 1rem;
+  list-style: none;
+  margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -32,21 +36,28 @@
   position: relative;
   background-size: cover;
   background-position: center;
-  height: 160px;
+  height: 180px;
   border-radius: 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1.5rem;
   color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.curso-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .curso-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
   z-index: 0;
 }
 
@@ -60,41 +71,157 @@
 }
 
 .curso-content h3 {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-weight: 700;
   text-transform: uppercase;
   -webkit-text-stroke: 1px black;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
 }
 
 .curso-content button {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  background-color: black;
-  border: none;
-  padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
+  gap: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
   width: fit-content;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.curso-content button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
 }
 
 .curso-content button::before {
   content: "▶";
-  font-size: 1.5rem;
+  font-size: 0.8rem;
 }
 
 .boton-wrapper {
   text-align: center;
-  margin-top: 1rem;
+  margin: 1.5rem 0;
 }
 
 .boton-wrapper button {
-  padding: 0.5rem 1rem;
-  border: 1px solid white;
+  padding: 0.75rem 2rem;
+  border: 2px solid white;
   color: white;
   background: transparent;
-  border-radius: 4px;
+  border-radius: 25px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.boton-wrapper button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 350px;
+  color: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-img {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.modal-title {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  text-align: center;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.modal-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0;
+}
+
+.modal-close {
+  background: #ffffff;
+  color: #000;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .cursos-container {
+    padding: 0 0.5rem;
+  }
+  
+  .curso-card {
+    height: 160px;
+    padding: 1rem;
+  }
+  
+  .curso-content h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .modal-img {
+    height: 160px;
+  }
+  
+  .curso-card {
+    height: 140px;
+  }
 }

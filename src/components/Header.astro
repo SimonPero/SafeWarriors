@@ -1,8 +1,8 @@
 ---
 import Image from "astro/components/Image.astro";
 import safeWarriorsLogo from "../assets/SafeWarriorLogo.png";
-import whatsappLogo from "../assets/whatsappLogo.png";
-import gmailLogo from "../assets/gmailLogo.png";
+import WhatsAppPopup from "./WhatsAppPopup.js";
+import GmailPopup from "./GmailPopup.js";
 ---
 
 <header class="header">
@@ -12,7 +12,7 @@ import gmailLogo from "../assets/gmailLogo.png";
         src={safeWarriorsLogo}
         alt="logo de safe warriors"
         class="logo"
-        loading={"eager"}
+        loading={"lazy"}
       />
       <h1 class="brand-name">SafeWarriors</h1>
     </div>
@@ -23,30 +23,8 @@ import gmailLogo from "../assets/gmailLogo.png";
       </div>
 
       <div class="contact-icons">
-        <a
-          href="https://wa.me/tu-numero"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src={whatsappLogo}
-            alt="logo de whatsapp"
-            class="contact-icon"
-            loading={"eager"}
-          />
-        </a>
-        <a
-          href="mailto:contacto@safewarriors.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src={gmailLogo}
-            alt="logo de gmail"
-            class="contact-icon"
-            loading={"eager"}
-          />
-        </a>
+        <WhatsAppPopup client:load />
+        <GmailPopup client:load />
       </div>
     </div>
   </div>
@@ -71,6 +49,8 @@ import gmailLogo from "../assets/gmailLogo.png";
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    /* Evitar overflow en pantallas medianas */
+    min-width: 0;
   }
 
   .brand {
@@ -78,22 +58,28 @@ import gmailLogo from "../assets/gmailLogo.png";
     align-items: center;
     gap: 0.75rem;
     flex-shrink: 0;
+    min-width: 0;
   }
 
   .logo {
-    width: clamp(80px, 20vw, 160px);
+    width: clamp(60px, 15vw, 160px);
     height: auto;
     object-fit: contain;
+    flex-shrink: 0;
   }
 
   .brand-name {
-    font-family: "Chocolate Classical Sans", Arial, sans-serif;
     color: #ffffff;
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0;
     letter-spacing: 0.5px;
     display: none;
+    /* Permitir que el texto se comprima si es necesario */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
   }
 
   .contact-container {
@@ -101,11 +87,14 @@ import gmailLogo from "../assets/gmailLogo.png";
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    flex-shrink: 0;
+    flex-shrink: 1;
+
+    min-width: 0;
   }
 
   .contact-text {
     display: block;
+    min-width: 0;
   }
 
   .contact-text span {
@@ -116,12 +105,17 @@ import gmailLogo from "../assets/gmailLogo.png";
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
   }
 
   .contact-icons {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-shrink: 0;
   }
 
   .contact-icon {
@@ -157,9 +151,52 @@ import gmailLogo from "../assets/gmailLogo.png";
     .contact-icons {
       gap: 0.75rem;
     }
+
+    .logo {
+      width: clamp(50px, 12vw, 80px);
+    }
   }
 
-  @media (width >= 700px) {
+  /* Pantallas medianas - aquí está el fix principal */
+  @media (width >= 700px) and (width < 1024px) {
+    .brand-name {
+      display: block;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    }
+
+    .contact-container {
+      flex-direction: row;
+      align-items: center;
+      gap: clamp(0.8rem, 2vw, 1.5rem);
+    }
+
+    .contact-text {
+      order: -1;
+    }
+
+    .contact-text span {
+      font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+      text-align: left;
+      letter-spacing: clamp(0.5px, 0.8px, 1px);
+    }
+
+    .contact-icon {
+      width: clamp(35px, 6vw, 42px);
+      height: clamp(35px, 6vw, 42px);
+    }
+
+    .contact-icons {
+      gap: clamp(0.8rem, 2vw, 1.5rem);
+    }
+
+    .header-container {
+      gap: clamp(0.5rem, 2vw, 1rem);
+      padding: 0 clamp(1rem, 3vw, 2rem);
+    }
+  }
+
+  /* Pantallas grandes */
+  @media (width >= 1024px) {
     .brand-name {
       display: block;
       font-size: 1.6rem;
