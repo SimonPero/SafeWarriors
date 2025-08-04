@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import whatsappLogo from "../assets/whatsappLogo.png";
+import qrImage from "../assets/qrcodigo.png";
 import "./popUp.css";
 
 export default function WhatsAppPopup() {
@@ -32,13 +33,13 @@ export default function WhatsAppPopup() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={whatsappLogo.src}
+              src={qrImage.src}
               alt="QR de WhatsApp"
               className="qr-image"
               loading={"lazy"}
             />
             <a
-              href="https://wa.me/123456789" // Replace with your actual WhatsApp link
+              href="https://wa.me/qr/5UPIZAGJYBHPM1"
               target="_blank"
               rel="noopener noreferrer"
               className="qr-contact-button"

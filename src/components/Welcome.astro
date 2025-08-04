@@ -70,11 +70,14 @@ import Footer from "./Footer.astro";
   }
 
   .hero-title {
-    font-size: 2rem;
-    color: #f00;
+    font-size: 2rem; /* Adjusted for a larger size */
+    color: #fff; /* Changed to white for a brighter look */
     font-weight: 800;
     overflow: auto;
-    -webkit-text-stroke: 2px black;
+    text-shadow:
+      0 0 10px #f00,
+      0 0 20px #f00; /* Added a subtle red glow for brilliance */
+    -webkit-text-stroke: 0; /* Removed the black outline */
   }
 
   .hero-text {
@@ -90,7 +93,7 @@ import Footer from "./Footer.astro";
     }
 
     .hero-title {
-      font-size: 1.5rem;
+      font-size: 1.8rem; /* Adjusted for smaller screens */
     }
 
     .hero-text {
