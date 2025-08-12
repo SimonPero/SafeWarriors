@@ -39,7 +39,7 @@ export default function WhatsAppPopup() {
               loading={"lazy"}
             />
             <a
-              href="https://wa.me/qr/5UPIZAGJYBHPM1"
+              href="https://wa.me/5491166041437"
               target="_blank"
               rel="noopener noreferrer"
               className="qr-contact-button"
